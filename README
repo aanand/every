@@ -5,9 +5,15 @@ compare:
   enum = [1.4, 2.4 ,3.4]
   enum.map {|i| i.floor } #=> [1, 2, 3]
   enum.map(&:floor)       #=> [1, 2, 3]
-  enum.every.floor        #=> [1, 2, 3]
+  enum.map.floor          #=> [1, 2, 3]
 
 arguments? sure:
 
-  %w( axb dxf ).every.gsub(/x/,'y')     #=> ['ayb', 'dyf']
-  %w( axb dxf ).every.gsub(/x/) { 'y' } #=> ['ayb', 'dyf']
+  %w( axb dxf ).map.gsub(/x/,'y')     #=> ['ayb', 'dyf']
+  %w( axb dxf ).map.gsub(/x/) { 'y' } #=> ['ayb', 'dyf']
+
+works with any Enumerable method that takes a single-argument block:
+
+  [0, 1, 2].partition.zero? #=> [[0], [1, 2]]
+  [8, 9, 10].sort_by.to_s   #=> [10, 8, 9]
+
